@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventPresentation"
+             x:Name="ThisPageEventPresentation"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventPresentation" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="Материалы" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Margin="5">
+                <ListView x:Name="PresentationListView"
+                          ItemsSource="{Binding PresentationList}"
+                          ItemTapped="PresentationListView_OnItemTapped"
+                          HasUnevenRows="True"
+                          RowHeight="-1"
+                          SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Spacing="0" Padding="5">
+                                    <Label Text="AA" VerticalOptions="Center" TextColor="{StaticResource Window}" WidthRequest="1" />
+                                    <Label Text="{Binding Name}" VerticalOptions="Center" TextColor="{StaticResource Accent}" MaxLines="2" LineBreakMode="TailTruncation" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

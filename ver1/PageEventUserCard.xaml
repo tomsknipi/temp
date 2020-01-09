@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             xmlns:view="clr-namespace:Event.View;assembly=Event"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventUserCard"
+             x:Name="ThisPageEventUserCard"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventUserCard" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="{Binding Title2}" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout IsVisible="{Binding HasUser}" Margin="5">
+                    <Frame Padding="10,10,5,5">
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <control:TintedImage HeightRequest="200" WidthRequest="150" VerticalOptions="End" HorizontalOptions="Start"
+                                                     Aspect="AspectFill" Source="{Binding UserPhoto}" TintColor="{Binding UserPhotoTintColor}">
+                                    <control:TintedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="UserPhoto_OnTapped" />
+                                    </control:TintedImage.GestureRecognizers>
+                                </control:TintedImage>
+                                <StackLayout VerticalOptions="End" HorizontalOptions="StartAndExpand" Spacing="0">
+                                    <Label Text="{Binding MobUser.LastName}" TextColor="{StaticResource PrimaryText}" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding MobUser.FirstName}" TextColor="{StaticResource PrimaryText}" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding MobUser.MiddleName}" TextColor="{StaticResource PrimaryText}" LineBreakMode="TailTruncation" />
+                                </StackLayout>
+                            </StackLayout>
+                            <Label Text="{Binding ViewMobPost}" IsVisible="{Binding HasViewMobPost}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource PrimaryText}" />
+                            <Label Text="{Binding ViewMobOrganization}" IsVisible="{Binding HasViewMobOrganization}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}" />
+                            <view:ViewLike MobLike="{Binding MobLike}" Page="{x:Reference ThisPageEventUserCard}" HorizontalOptions="End" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

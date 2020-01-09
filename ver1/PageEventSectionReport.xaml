@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             xmlns:view="clr-namespace:Event.View;assembly=Event"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventSectionReport"
+             x:Name="ThisPageEventSectionReport"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventSectionReport" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="{Binding Title2}" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout IsVisible="{Binding HasSection}" Margin="5" BindableLayout.ItemsSource="{Binding SectionReportList}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10,5">
+                                <StackLayout>
+                                    <StackLayout Spacing="0">
+                                        <Label Text="{Binding ViewDateFromTo}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding ViewLocation}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}"
+                                               IsVisible="{Binding HasViewLocation}" LineBreakMode="TailTruncation" />
+                                    </StackLayout>
+                                    <StackLayout>
+                                        <Label Text="{Binding ViewName}" TextColor="{StaticResource Accent}" MaxLines="2" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding ViewDescription}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}"
+                                               IsVisible="{Binding HasViewDescription}" MaxLines="4" LineBreakMode="TailTruncation" />
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Report_OnTapped" CommandParameter="{Binding}" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                    <control:ViewAccordion Title="Докладчик" Margin="-10,0" TitleTextLeftOffset="5" IsVisible="{Binding HasMobUserList}">
+                                        <control:ViewAccordion.View>
+                                            <StackLayout Margin="10,0" BindableLayout.ItemsSource="{Binding MobUserList}">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <view:ViewUser MobUser="{Binding}" MobUserClicked="ViewUser_OnMobUserClicked" />
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                        </control:ViewAccordion.View>
+                                    </control:ViewAccordion>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             mc:Ignorable="d"
+             x:Class="Event.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <x:Double x:Key="FontMicro">13</x:Double>
+            <x:Double x:Key="FontSmall">15</x:Double>
+            <x:Double x:Key="FontMedium">17</x:Double>
+            <x:Double x:Key="FontLarge">20</x:Double>
+
+            <Color x:Key="Primary">#fafafa</Color>
+            <Color x:Key="PrimaryDark">#fafafa</Color>
+            <Color x:Key="PrimaryLight">#fafafa</Color>
+            <Color x:Key="Accent">#0d47a1</Color>
+            <Color x:Key="PrimaryText">#212121</Color>
+            <Color x:Key="SecondaryText">#757575</Color>
+            <Color x:Key="PlaceholderTextMicro">#bf360c</Color>
+            <Color x:Key="PlaceholderText">#cf6b4c</Color>
+            <Color x:Key="Icons">#0d47a1</Color>
+            <Color x:Key="Divider">#bdbdbd</Color>
+
+            <Color x:Key="Window">#fafafa</Color>
+            <Color x:Key="Selected">#eeeeee</Color>
+            <Color x:Key="Disabled">#bdbdbd</Color>
+
+            <Style TargetType="StackLayout" ApplyToDerivedTypes="True">
+                <Setter Property="Spacing" Value="5" />
+            </Style>
+
+            <Style TargetType="Grid" ApplyToDerivedTypes="True">
+                <Setter Property="RowSpacing" Value="5" />
+                <Setter Property="ColumnSpacing" Value="5" />
+            </Style>
+
+            <Style TargetType="Entry" ApplyToDerivedTypes="True">
+                <Setter Property="FontSize" Value="{StaticResource FontMedium}" />
+                <Setter Property="TextColor" Value="{StaticResource Accent}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlaceholderTextMicro}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+            </Style>
+
+            <Style TargetType="Editor" ApplyToDerivedTypes="True">
+                <Setter Property="FontSize" Value="{StaticResource FontMedium}" />
+                <Setter Property="TextColor" Value="{StaticResource Accent}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlaceholderTextMicro}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+            </Style>
+
+            <Style TargetType="Picker" ApplyToDerivedTypes="True">
+                <Setter Property="FontSize" Value="{StaticResource FontMedium}" />
+                <Setter Property="TextColor" Value="{StaticResource Accent}" />
+                <Setter Property="TitleColor" Value="{StaticResource PlaceholderTextMicro}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+            </Style>
+
+            <Style TargetType="DatePicker" ApplyToDerivedTypes="True">
+                <Setter Property="FontSize" Value="{StaticResource FontMedium}" />
+                <Setter Property="TextColor" Value="{StaticResource Accent}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+            </Style>
+
+            <Style TargetType="TimePicker" ApplyToDerivedTypes="True">
+                <Setter Property="FontSize" Value="{StaticResource FontMedium}" />
+                <Setter Property="TextColor" Value="{StaticResource Accent}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+            </Style>
+
+            <Style TargetType="Label" ApplyToDerivedTypes="True">
+                <Setter Property="FontSize" Value="{StaticResource FontMedium}" />
+                <Setter Property="TextColor" Value="{StaticResource SecondaryText}" />
+            </Style>
+
+            <Style TargetType="ListView" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+                <Setter Property="SeparatorColor" Value="{StaticResource Divider}" />
+            </Style>
+
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+            </Style>
+
+            <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BarTextColor" Value="{StaticResource Icons}" />
+            </Style>
+
+            <Style TargetType="Button" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+                <Setter Property="TextColor" Value="{StaticResource Accent}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStatesStyle">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource PrimaryText}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="Frame" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="Margin" Value="1" />
+            </Style>
+
+            <Style TargetType="ActivityIndicator" ApplyToDerivedTypes="True">
+                <Setter Property="Color" Value="{StaticResource PlaceholderText}" />
+            </Style>
+
+            <Style TargetType="control:TintedImageButton" ApplyToDerivedTypes="True">
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="TintColor" Value="{StaticResource Accent}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Window}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStatesStyle">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="TintColor" Value="{StaticResource Accent}" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="TintColor" Value="{StaticResource Disabled}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="control:ViewAccordion" ApplyToDerivedTypes="True">
+                <Setter Property="TitleBackgroundColor" Value="{StaticResource Selected}" />
+                <Setter Property="TitleTextColor" Value="{StaticResource Accent}" />
+            </Style>
+
+            <Style TargetType="control:ViewTitle" ApplyToDerivedTypes="True">
+                <Setter Property="Title1Color" Value="{StaticResource PrimaryText}" />
+                <Setter Property="Title2Color" Value="{StaticResource SecondaryText}" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
