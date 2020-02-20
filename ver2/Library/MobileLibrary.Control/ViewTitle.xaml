@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileLibrary.Control.ViewTitle">
+    <ContentView.Content>
+        <StackLayout Spacing="0" VerticalOptions="Fill">
+            <Label x:Name="Label1Title" MaxLines="1" LineBreakMode="TailTruncation" />
+            <Label x:Name="Label2Title" MaxLines="1" LineBreakMode="TailTruncation" />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

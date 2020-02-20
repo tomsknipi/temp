@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             x:Class="MobileLibrary.Control.ViewCheck">
+    <ContentView.Content>
+        <control:TintedImageButton x:Name="Button" Source="empty.png" MinimumHeightRequest="32" MinimumWidthRequest="32"
+                                   VerticalOptions="Center" HorizontalOptions="Center" Clicked="Button_OnClicked" />
+    </ContentView.Content>
+</ContentView>

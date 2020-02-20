@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             x:Class="MobileLibrary.Control.ViewAccordion">
+    <ContentView.Content>
+        <control:MyAccordion x:Name="ExpandableView" IsExpanded="True">
+            <control:MyAccordion.PrimaryView>
+                <StackLayout x:Name="LayoutTitle" Orientation="Horizontal" Padding="5,5,5,5">
+                    <Label x:Name="LabelTitle" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                    <control:TintedImage x:Name="ImageArrow" Source="keyboard_arrow_down.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </control:MyAccordion.PrimaryView>
+        </control:MyAccordion>
+    </ContentView.Content>
+</ContentView>
