@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             mc:Ignorable="d"
+             x:Class="Event.View.ViewLike"
+             x:Name="ThisViewLike"
+             Visual="Material">
+    <ContentView.Content>
+        <StackLayout Orientation="Horizontal" Spacing="20" BindingContext="{x:Reference ThisViewLike}">
+            <StackLayout Spacing="0">
+                <control:TintedImage VerticalOptions="Center" HorizontalOptions="Center" Source="thumb_down.png" TintColor="{Binding DownColorImage}" />
+                <Label VerticalOptions="Center" HorizontalOptions="Center" FontSize="{StaticResource FontMicro}" TextColor="{Binding DownColorText}" Text="{Binding DownText}" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Down_OnTapped" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+            <StackLayout Spacing="0">
+                <control:TintedImage VerticalOptions="Center" HorizontalOptions="Center" Source="thumb_up.png" TintColor="{Binding UpColorImage}" />
+                <Label VerticalOptions="Center" HorizontalOptions="Center" FontSize="{StaticResource FontMicro}" TextColor="{Binding UpColorText}" Text="{Binding UpText}" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Up_OnTapped" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

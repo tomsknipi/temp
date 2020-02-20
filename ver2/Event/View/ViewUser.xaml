@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             mc:Ignorable="d"
+             x:Class="Event.View.ViewUser"
+             x:Name="ThisViewUser"
+             Visual="Material">
+    <ContentView.Content>
+        <StackLayout x:Name="StackMain" Orientation="Horizontal" BindingContext="{x:Reference ThisViewUser}">
+            <Frame VerticalOptions="Start" HorizontalOptions="Start" HasShadow="False" IsClippedToBounds="True" HeightRequest="48" WidthRequest="48" Visual=""
+                   MinimumHeightRequest="48" MinimumWidthRequest="48" Padding="0" Margin="0" CornerRadius="24"
+                   BorderColor="{StaticResource Selected}" BackgroundColor="{StaticResource Selected}">
+                <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
+                    <control:TintedImage VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill"
+                                         BackgroundColor="{StaticResource Selected}" Source="user_profile_medium.png" TintColor="{StaticResource Disabled}" />
+
+                    <forms:CachedImage VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill"
+                                       BackgroundColor="Transparent" Source="{Binding UserPhoto}"
+                                       CacheType="None" />
+                </Grid>
+            </Frame>
+            <StackLayout VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                <Label Text="{Binding UserName}" TextColor="{StaticResource Accent}" LineBreakMode="TailTruncation" />
+                <StackLayout Spacing="0">
+                    <Label Text="{Binding ViewMobPost}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource PrimaryText}" LineBreakMode="TailTruncation" MaxLines="2"
+                           IsVisible="{Binding HasViewMobPost}" />
+                    <Label Text="{Binding ViewMobOrganization}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}" LineBreakMode="TailTruncation" MaxLines="2"
+                           IsVisible="{Binding HasViewMobOrganization}" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
