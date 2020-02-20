@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             xmlns:converters="clr-namespace:Event.Converters;assembly=Event"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventSection"
+             x:Name="ThisPageEventSection"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventSection" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="Секции" />
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IsSectionReportsToColorConverter x:Key="IsSectionReportsToColor" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Margin="5">
+                <ListView x:Name="SectionListView"
+                          ItemsSource="{Binding SectionList}"
+                          ItemTapped="SectionListView_OnItemTapped"
+                          HasUnevenRows="True"
+                          RowHeight="-1"
+                          SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="5">
+                                    <Label Text="{Binding ViewDateFromTo}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Name}" TextColor="{Binding IsSectionReports, Converter={StaticResource IsSectionReportsToColor}}" />
+                                    <Label Text="{Binding ViewDescription}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}"
+                                           IsVisible="{Binding HasViewDescription}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

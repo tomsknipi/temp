@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             xmlns:view="clr-namespace:Event.View;assembly=Event"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventNewCard"
+             x:Name="ThisPageEventNewCard"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventNewCard" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="{Binding Title2}" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout IsVisible="{Binding HasNew}" Margin="5" VerticalOptions="StartAndExpand">
+                    <Frame Padding="10,5">
+                        <StackLayout>
+                            <Label Text="{Binding MobNew.DateInput, StringFormat='{0:dd.MM.yyyy HH:mm}'}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" />
+                            <Label Text="{Binding MobNew.ViewName}" TextColor="{StaticResource PrimaryText}" />
+                            <forms:CachedImage x:Name="ImagePhoto" Aspect="AspectFit" BackgroundColor="Transparent" Source="{Binding SourcePhoto}"
+                                               IsVisible="{Binding MobNew.IsPhoto}" CacheType="None">
+                                <forms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="SourcePhoto_OnTapped" />
+                                </forms:CachedImage.GestureRecognizers>
+                            </forms:CachedImage>
+                            <Label Text="{Binding MobNew.ViewDescription}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}"
+                                   IsVisible="{Binding MobNew.HasViewDescription}" />
+                            <view:ViewLike MobLike="{Binding MobLike}" Page="{x:Reference ThisPageEventNewCard}" HorizontalOptions="End" />
+                            <control:ViewAccordion Title="Автор" Margin="-10,0" TitleTextLeftOffset="5" IsVisible="{Binding HasMobUser}">
+                                <control:ViewAccordion.View>
+                                    <StackLayout Margin="10,0">
+                                        <view:ViewUser MobUser="{Binding MobUser}" MobUserClicked="ViewUser_OnMobUserClicked" />
+                                    </StackLayout>
+                                </control:ViewAccordion.View>
+                            </control:ViewAccordion>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

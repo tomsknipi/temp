@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                  xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+                  xmlns:converters="clr-namespace:Event.Converters;assembly=Event"
+                  ios:Page.UseSafeArea="true"
+                  mc:Ignorable="d"
+                  x:Class="Event.MainPage"
+                  x:Name="ThisMainPage"
+                  Visual="Material"
+                  Title="ТомскНИПИ Мероприятия">
+    <MasterDetailPage.BindingContext>
+        <x:Reference Name="ThisMainPage" />
+    </MasterDetailPage.BindingContext>
+    <MasterDetailPage.Master>
+        <ContentPage Title="ТомскНИПИ Мероприятия">
+            <ContentPage.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="iOS" Value="menu.png" />
+                </OnPlatform>
+            </ContentPage.IconImageSource>
+            <ContentPage.Resources>
+                <ResourceDictionary>
+                    <converters:BadgeCountToTextConverter x:Key="BadgeCountToText" />
+                </ResourceDictionary>
+            </ContentPage.Resources>
+            <ContentPage.Content>
+                <Grid>
+                    <StackLayout BackgroundColor="{StaticResource Window}" Spacing="0" VerticalOptions="FillAndExpand">
+                        <StackLayout Padding="10,5" BackgroundColor="{Binding EventBackgroundColor}">
+                            <StackLayout Spacing="0">
+                                <Label Text="{Binding EventViewDateFromTo}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding EventLocation}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                <Label Text="AA" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource Window}" WidthRequest="0" VerticalOptions="Center" />
+                                <Label Text="{Binding EventName}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource Accent}" MaxLines="2" LineBreakMode="TailTruncation"
+                                       VerticalOptions="Center" />
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Event_OnTapped" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <StackLayout BackgroundColor="{StaticResource Divider}" HeightRequest="1" Margin="10,5" />
+                        <ListView x:Name="ListViewMenu" ItemsSource="{Binding MenuItemsVisible}"
+                                  ItemTapped="ListViewMenu_OnItemTapped"
+                                  HasUnevenRows="True"
+                                  RowHeight="-1"
+                                  SeparatorVisibility="None"
+                                  SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell IsEnabled="{Binding IsEnabled}">
+                                        <StackLayout Spacing="0">
+                                            <StackLayout Padding="10,5" IsVisible="{Binding IsSplitter}" BackgroundColor="{StaticResource Window}">
+                                                <StackLayout BackgroundColor="{StaticResource Divider}" HeightRequest="1" />
+                                            </StackLayout>
+                                            <StackLayout Padding="10" VerticalOptions="FillAndExpand" Orientation="Horizontal" BackgroundColor="{Binding BackgroundColor}" Spacing="0">
+                                                <control:TintedImage Source="{Binding ImageSource}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" TintColor="{Binding ImageColor}" />
+                                                <Label Text="{Binding Text}" VerticalOptions="Center" Margin="10,0,0,0" TextColor="{Binding TextColor}" />
+                                                <control:ViewBadge Text="{Binding MessageCount, Converter={StaticResource BadgeCountToText}}" VerticalOptions="Center" Margin="5,0,0,0" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+
+                    <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+                </Grid>
+            </ContentPage.Content>
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

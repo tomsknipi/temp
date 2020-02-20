@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="Event.PageAccount"
+             x:Name="ThisPageAccount"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageAccount" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="Аккаунт" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout Padding="5">
+                    <Entry x:Name="EntryLogin" Placeholder="Логин" TextChanged="EntryLogin_OnTextChanged" MaxLength="104" />
+                    <Grid ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Entry Grid.Column="0" x:Name="EntryPassword" Placeholder="Пароль" IsPassword="True" MaxLength="104" TextChanged="EntryPassword_OnTextChanged" />
+                        <control:TintedImageButton Grid.Column="1" x:Name="ButtonPasswordChange" Source="edit.png" Clicked="ButtonPasswordChange_OnClicked" />
+                    </Grid>
+                    <Button x:Name="ButtonConnect" Text="ПОДКЛЮЧИТЬСЯ К СЕРВИСУ" HorizontalOptions="Start" Clicked="ButtonConnect_OnClicked" />
+
+                    <StackLayout IsVisible="{Binding HasUser}" Margin="0,15,0,0">
+                        <Frame Padding="10,10,5,5">
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Grid HeightRequest="200" WidthRequest="150" VerticalOptions="End" HorizontalOptions="Start">
+                                        <control:TintedImage VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill"
+                                                             BackgroundColor="Transparent" Source="user_profile_large.png" TintColor="{StaticResource Selected}">
+                                            <control:TintedImage.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="UserPhoto_OnTapped" />
+                                            </control:TintedImage.GestureRecognizers>
+                                        </control:TintedImage>
+
+                                        <control:TintedImage VerticalOptions="End" HorizontalOptions="End"
+                                                             Source="photo_camera.png" TintColor="{StaticResource Accent}">
+                                            <control:TintedImage.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="UserPhoto_OnTapped" />
+                                            </control:TintedImage.GestureRecognizers>
+                                        </control:TintedImage>
+
+                                        <forms:CachedImage x:Name="ImagePhoto" VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill"
+                                                           BackgroundColor="Transparent" Source="{Binding UserPhoto}"
+                                                           CacheType="None">
+                                            <forms:CachedImage.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="UserPhoto_OnTapped" />
+                                            </forms:CachedImage.GestureRecognizers>
+                                        </forms:CachedImage>
+                                    </Grid>
+                                    <StackLayout VerticalOptions="End" HorizontalOptions="StartAndExpand" Spacing="0">
+                                        <Label Text="{Binding MobUser.LastName}" TextColor="{StaticResource PrimaryText}" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding MobUser.FirstName}" TextColor="{StaticResource PrimaryText}" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding MobUser.MiddleName}" TextColor="{StaticResource PrimaryText}" LineBreakMode="TailTruncation" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <Label Text="{Binding ViewMobPost}" IsVisible="{Binding HasViewMobPost}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource PrimaryText}" />
+                                <Label Text="{Binding ViewMobOrganization}" IsVisible="{Binding HasViewMobOrganization}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

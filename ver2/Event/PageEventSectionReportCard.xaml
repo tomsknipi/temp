@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             xmlns:view="clr-namespace:Event.View;assembly=Event"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventSectionReportCard"
+             x:Name="ThisPageEventSectionReportCard"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventSectionReportCard" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="{Binding Title2}" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout IsVisible="{Binding HasReport}" Margin="5">
+                    <Frame Padding="10,5">
+                        <StackLayout>
+                            <StackLayout Spacing="0">
+                                <Label Text="{Binding Report.ViewDateFromTo}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" />
+                                <Label Text="{Binding Report.ViewLocation}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}"
+                                       IsVisible="{Binding Report.HasViewLocation}" />
+                            </StackLayout>
+                            <Label Text="{Binding Report.ViewName}" TextColor="{StaticResource PrimaryText}" />
+                            <Label Text="{Binding Report.ViewDescription}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}"
+                                   IsVisible="{Binding Report.HasViewDescription}" />
+                            <view:ViewLike MobLike="{Binding MobLike}" Page="{x:Reference ThisPageEventSectionReportCard}" HorizontalOptions="End" />
+                            <control:ViewAccordion Title="Докладчик" Margin="-10,0" TitleTextLeftOffset="5" IsVisible="{Binding Report.HasMobUserList}">
+                                <control:ViewAccordion.View>
+                                    <StackLayout Margin="10,0" BindableLayout.ItemsSource="{Binding Report.MobUserList}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <view:ViewUser MobUser="{Binding}" MobUserClicked="ViewUser_OnMobUserClicked" />
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
+                                </control:ViewAccordion.View>
+                            </control:ViewAccordion>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             xmlns:view="clr-namespace:Event.View;assembly=Event"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventSheduleCard"
+             x:Name="ThisPageEventSheduleCard"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventSheduleCard" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="{Binding Title2}" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout IsVisible="{Binding HasShedule}" Margin="5" VerticalOptions="StartAndExpand">
+                    <Frame Padding="10,5">
+                        <StackLayout>
+                            <StackLayout Spacing="0">
+                                <Label Text="{Binding MobShedule.ViewDateFromTo}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" />
+                                <Label Text="{Binding MobShedule.ViewLocation}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}"
+                                       IsVisible="{Binding MobShedule.HasViewLocation}" />
+                            </StackLayout>
+                            <Label Text="{Binding MobShedule.ViewName}" TextColor="{StaticResource PrimaryText}" />
+                            <Label Text="{Binding MobShedule.ViewDescription}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}"
+                                   IsVisible="{Binding MobShedule.HasViewDescription}" />
+                            <view:ViewLike MobLike="{Binding MobLike}" Page="{x:Reference ThisPageEventSheduleCard}" HorizontalOptions="End" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
