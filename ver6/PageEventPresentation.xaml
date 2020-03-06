@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventPresentation"
+             x:Name="ThisPageEventPresentation"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventPresentation" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="Материалы" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Margin="5">
+                <ListView x:Name="PresentationListView"
+                          ItemsSource="{Binding PresentationList}"
+                          ItemTapped="PresentationListView_OnItemTapped"
+                          HasUnevenRows="True"
+                          RowHeight="-1"
+                          SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Spacing="0">
+                                    <StackLayout Padding="5">
+                                        <Label Text="{Binding ViewHeader}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                        <Grid VerticalOptions="Center">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <control:TintedImage Grid.Row="0" Grid.Column="0" Source="{Binding ViewImage}" TintColor="{StaticResource Accent}" VerticalOptions="Center" />
+                                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding ViewName}" TextColor="{StaticResource Accent}" VerticalOptions="Center" />
+                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding ViewDescription}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}"
+                                                   IsVisible="{Binding HasViewDescription}" />
+                                        </Grid>
+                                    </StackLayout>
+                                    <ProgressBar Progress="{Binding ViewProgress}" HeightRequest="2" BackgroundColor="Transparent" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
