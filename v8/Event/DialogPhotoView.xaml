@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<extension:AwaitablePopupPage
+    x:TypeArguments="x:Boolean"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:extension="clr-namespace:MobileLibrary.Extension;assembly=MobileLibrary.Extension"
+    xmlns:pinchZoomImage="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage"
+    mc:Ignorable="d"
+    x:Class="Event.DialogPhotoView"
+    x:Name="ThisDialogPhotoView"
+    CloseWhenBackgroundIsClicked="False">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisDialogPhotoView" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Window}">
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" VerticalOptions="FillAndExpand">
+                <pinchZoomImage:PinchZoom HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Image Source="{Binding Photo}" BackgroundColor="Transparent" Aspect="AspectFit" />
+                </pinchZoomImage:PinchZoom>
+            </StackLayout>
+            <Button x:Name="ButtonCancel" Text="ОТМЕНА" Margin="5" Clicked="ButtonCancel_OnClicked"
+                    AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,-1,-1" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</extension:AwaitablePopupPage>

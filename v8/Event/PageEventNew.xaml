@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             xmlns:converters="clr-namespace:Event.Converters;assembly=Event"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventNew"
+             x:Name="ThisPageEventNew"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventNew" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="Новости" />
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BadgeCountToTextConverter x:Key="BadgeCountToText" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Margin="5">
+                <ListView x:Name="NewListView"
+                          ItemsSource="{Binding NewList}"
+                          ItemTapped="NewListView_OnItemTapped"
+                          HasUnevenRows="True"
+                          RowHeight="-1"
+                          SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Text="{StaticResource IconShedule}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}" 
+                                               FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                        <Label Grid.Column="1" Text="{Binding DateInput, StringFormat='{0:dd.MM.yyyy HH:mm}'}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                    </Grid>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Name}" TextColor="{StaticResource Accent}" VerticalOptions="Center" MaxLines="2" LineBreakMode="TailTruncation" />
+                                        <control:ViewBadge Text="{Binding MessageCount, Converter={StaticResource BadgeCountToText}}" VerticalOptions="Center" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

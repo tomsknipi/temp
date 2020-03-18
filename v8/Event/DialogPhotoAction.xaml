@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<extension:AwaitablePopupPage
+    x:TypeArguments="mobileClasses:DialogPhotoActionResult"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:extension="clr-namespace:MobileLibrary.Extension;assembly=MobileLibrary.Extension"
+    xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+    xmlns:mobileClasses="clr-namespace:Event;assembly=Event"
+    mc:Ignorable="d"
+    x:Class="Event.DialogPhotoAction"
+    x:Name="ThisDialogPhotoAction"
+    CloseWhenBackgroundIsClicked="False">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisDialogPhotoAction" />
+    </ContentPage.BindingContext>
+    <Grid Padding="15,0">
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Frame Padding="10" BackgroundColor="{StaticResource Window}">
+                <StackLayout>
+                    <Label Text="Выбор источника" FontSize="{StaticResource FontLarge}" TextColor="{StaticResource PrimaryText}" />
+                    <Entry HeightRequest="0" WidthRequest="0" />
+
+                    <StackLayout Spacing="0" IsVisible="{Binding ItemCamera.IsVisible}">
+                        <StackLayout Padding="0,5" IsVisible="{Binding ItemCamera.IsSplitter}" BackgroundColor="{StaticResource Window}">
+                            <StackLayout BackgroundColor="{StaticResource Divider}" HeightRequest="1" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Padding="0,5">
+                            <control:TintedImage VerticalOptions="Center" Source="{Binding ItemCamera.ImageSource}" TintColor="{Binding ItemCamera.TintColor}" />
+                            <Label VerticalOptions="Center" Text="{Binding ItemCamera.Text}" TextColor="{Binding ItemCamera.TintColor}" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ImageButtonCamera_OnClicked" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" IsVisible="{Binding ItemGallery.IsVisible}">
+                        <StackLayout Padding="0,5" IsVisible="{Binding ItemGallery.IsSplitter}" BackgroundColor="{StaticResource Window}">
+                            <StackLayout BackgroundColor="{StaticResource Divider}" HeightRequest="1" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Padding="0,5">
+                            <control:TintedImage VerticalOptions="Center" Source="{Binding ItemGallery.ImageSource}" TintColor="{Binding ItemGallery.TintColor}" />
+                            <Label VerticalOptions="Center" Text="{Binding ItemGallery.Text}" TextColor="{Binding ItemGallery.TintColor}" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ImageButtonGallery_OnClicked" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" IsVisible="{Binding ItemView.IsVisible}">
+                        <StackLayout Padding="0,5" IsVisible="{Binding ItemView.IsSplitter}" BackgroundColor="{StaticResource Window}">
+                            <StackLayout BackgroundColor="{StaticResource Divider}" HeightRequest="1" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Padding="0,5">
+                            <control:TintedImage VerticalOptions="Center" Source="{Binding ItemView.ImageSource}" TintColor="{Binding ItemView.TintColor}" />
+                            <Label VerticalOptions="Center" Text="{Binding ItemView.Text}" TextColor="{Binding ItemView.TintColor}" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ImageButtonView_OnClicked" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" IsVisible="{Binding ItemDelete.IsVisible}">
+                        <StackLayout Padding="0,5" IsVisible="{Binding ItemDelete.IsSplitter}" BackgroundColor="{StaticResource Window}">
+                            <StackLayout BackgroundColor="{StaticResource Divider}" HeightRequest="1" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Padding="0,5">
+                            <control:TintedImage VerticalOptions="Center" Source="{Binding ItemDelete.ImageSource}" TintColor="{Binding ItemDelete.TintColor}" />
+                            <Label VerticalOptions="Center" Text="{Binding ItemDelete.Text}" TextColor="{Binding ItemDelete.TintColor}" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ImageButtonDelete_OnClicked" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <Button x:Name="ButtonCancel" VerticalOptions="End" HorizontalOptions="End" Text="ОТМЕНА" Clicked="ButtonCancel_OnClicked" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+        <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+    </Grid>
+</extension:AwaitablePopupPage>

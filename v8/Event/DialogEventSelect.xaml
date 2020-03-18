@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<extension:AwaitablePopupPage
+    x:TypeArguments="mobileClasses:MobEventMenu"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:extension="clr-namespace:MobileLibrary.Extension;assembly=MobileLibrary.Extension"
+    xmlns:mobileClasses="clr-namespace:TomskNipi.Event.MobileClasses;assembly=TomskNipi.Event.MobileClasses"
+    xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+    xmlns:converters="clr-namespace:Event.Converters;assembly=Event"
+    mc:Ignorable="d"
+    x:Class="Event.DialogEventSelect"
+    x:Name="ThisDialogEventSelect"
+    CloseWhenBackgroundIsClicked="False">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisDialogEventSelect" />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BadgeCountToTextConverter x:Key="BadgeCountToText" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Padding="15,0">
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Frame Padding="10" BackgroundColor="{StaticResource Window}">
+                <StackLayout>
+                    <Label Text="Выбор мероприятия" FontSize="{StaticResource FontLarge}" TextColor="{StaticResource PrimaryText}" />
+                    <Entry HeightRequest="0" WidthRequest="0" />
+                    <ListView x:Name="EventListView"
+                              ItemsSource="{Binding EventList}"
+                              ItemAppearing="EventListView_OnItemAppearing"
+                              ItemTapped="EventListView_OnItemTapped"
+                              HasUnevenRows="True"
+                              RowHeight="-1"
+                              SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Padding="5">
+                                        <StackLayout Spacing="0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{StaticResource IconShedule}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}" 
+                                                       FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                                <Label Grid.Column="1" Text="{Binding ViewDateFromTo}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                            </Grid>
+                                            <Grid IsVisible="{Binding HasViewLocation}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{StaticResource IconPlace}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}" 
+                                                       FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                                <Label Grid.Column="1" Text="{Binding ViewLocation}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                            </Grid>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Name}" TextColor="{StaticResource Accent}" VerticalOptions="Center" MaxLines="2" LineBreakMode="TailTruncation" />
+                                            <control:ViewBadge Text="{Binding MessageEventUserCount, Converter={StaticResource BadgeCountToText}}" VerticalOptions="Center" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button x:Name="ButtonCancel" VerticalOptions="End" HorizontalOptions="End" Text="ОТМЕНА" Clicked="ButtonCancel_OnClicked" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+        <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+    </Grid>
+</extension:AwaitablePopupPage>

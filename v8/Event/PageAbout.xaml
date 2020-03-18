@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             mc:Ignorable="d"
+             x:Class="Event.PageAbout"
+             x:Name="ThisPageAbout"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageAbout" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="О Программе" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout>
+                <Image Margin="5" x:Name="ImageLogo" Source="logotype.png" HorizontalOptions="StartAndExpand" />
+                <ScrollView>
+                    <StackLayout>
+                        <control:ViewAccordion Title="{Binding Title}">
+                            <control:ViewAccordion.View>
+                                <StackLayout Padding="5,0">
+                                    <Frame Padding="10,5" IsClippedToBounds="True">
+                                        <StackLayout>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{StaticResource IconInfo}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}"
+                                                       FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                                <Label Grid.Column="1" Text="Версия программы" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                            </Grid>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding VersionText}"
+                                                       TextColor="{StaticResource PrimaryText}" />
+                                                <Label VerticalOptions="Center" HorizontalOptions="Start" Text="сборка:" />
+                                                <Label VerticalOptions="Center" HorizontalOptions="Fill" Text="{Binding BuildText}"
+                                                       TextColor="{StaticResource PrimaryText}" LineBreakMode="TailTruncation" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </control:ViewAccordion.View>
+                        </control:ViewAccordion>
+
+                        <control:ViewAccordion Title="Контактная информация">
+                            <control:ViewAccordion.View>
+                                <StackLayout Padding="5,0">
+                                    <Frame Padding="10,5">
+                                        <StackLayout>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{StaticResource IconPlace}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}"
+                                                       FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                                <Label Grid.Column="1" Text="Адрес" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                            </Grid>
+                                            <Label Text="Россия, 634027, г.Томск, пр.Мира, 72" TextColor="{StaticResource PrimaryText}" LineBreakMode="TailTruncation" />
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame Padding="10,5">
+                                        <StackLayout>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{StaticResource IconPhone}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}"
+                                                       FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                                <Label Grid.Column="1" Text="Приемная" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                            </Grid>
+                                            <Label Text="+7(3822) 611-990" TextColor="{StaticResource Accent}" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding CommandPhone}" CommandParameter="+7(3822) 611-990" />
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame Padding="10,5">
+                                        <StackLayout>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{StaticResource IconPhone}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}"
+                                                       FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                                <Label Grid.Column="1" Text="Многоканальный" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                            </Grid>
+                                            <Label Text="+7(3822) 611-800" TextColor="{StaticResource Accent}" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding CommandPhone}" CommandParameter="+7(3822) 611-800" />
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame Padding="10,5">
+                                        <StackLayout>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{StaticResource IconMailOtline}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}"
+                                                       FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                                <Label Grid.Column="1" Text="Почта" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                            </Grid>
+                                            <Label Text="nipineft@tomsknipi.ru" TextColor="{StaticResource Accent}" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding CommandMail}" CommandParameter="nipineft@tomsknipi.ru" />
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame Padding="10,5">
+                                        <StackLayout>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{StaticResource IconOpenInBrowser}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}"
+                                                       FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                                <Label Grid.Column="1" Text="Сайт" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                            </Grid>
+                                            <Label Text="http://www.tomsknipineft.ru" TextColor="{StaticResource Accent}" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding CommandUrl}" CommandParameter="http://www.tomsknipineft.ru" />
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </control:ViewAccordion.View>
+                        </control:ViewAccordion>
+
+                        <control:ViewAccordion Title="Поддержка мобильных разработок">
+                            <control:ViewAccordion.View>
+                                <StackLayout Padding="5,0">
+                                    <Frame Padding="10,5">
+                                        <StackLayout>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{StaticResource IconMailOtline}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}"
+                                                       FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                                <Label Grid.Column="1" Text="Почта" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                            </Grid>
+                                            <Label Text="tomsknipi.orppo@gmail.com" TextColor="{StaticResource Accent}" LineBreakMode="TailTruncation" VerticalOptions="Center" />
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding CommandMail}" CommandParameter="tomsknipi.orppo@gmail.com" />
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </control:ViewAccordion.View>
+                        </control:ViewAccordion>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

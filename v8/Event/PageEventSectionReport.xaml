@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             mc:Ignorable="d"
+             x:Class="Event.PageEventSectionReport"
+             x:Name="ThisPageEventSectionReport"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEventSectionReport" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="{Binding Title2}" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout IsVisible="{Binding HasSection}" Margin="5" BindableLayout.ItemsSource="{Binding SectionReportList}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10,5">
+                                <StackLayout>
+                                    <StackLayout Spacing="0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Text="{StaticResource IconShedule}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}" 
+                                                   FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                            <Label Grid.Column="1" Text="{Binding ViewDateFromTo}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                        </Grid>
+                                        <Grid IsVisible="{Binding HasViewLocation}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Text="{StaticResource IconPlace}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}" 
+                                                   FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                            <Label Grid.Column="1" Text="{Binding ViewLocation}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                        </Grid>
+                                    </StackLayout>
+                                    <StackLayout>
+                                        <Label Text="{Binding ViewName}" TextColor="{StaticResource Accent}" MaxLines="2" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding ViewDescription}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}"
+                                               IsVisible="{Binding HasViewDescription}" MaxLines="4" LineBreakMode="TailTruncation" />
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Report_OnTapped" CommandParameter="{Binding}" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:control="clr-namespace:MobileLibrary.Control;assembly=MobileLibrary.Control"
+             xmlns:view="clr-namespace:Event.View;assembly=Event"
+             mc:Ignorable="d"
+             x:Class="Event.PageEvent"
+             x:Name="ThisPageEvent"
+             Visual="Material"
+             NavigationPage.BackButtonTitle="    "
+             Title="ТомскНИПИ Мероприятия">
+    <ContentPage.BindingContext>
+        <x:Reference Name="ThisPageEvent" />
+    </ContentPage.BindingContext>
+    <NavigationPage.TitleView>
+        <control:ViewTitle Title1="{Binding Title}" Title2="{Binding Title2}" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout>
+                <ScrollView x:Name="ScrollViewMain" MinimumHeightRequest="-10000">
+                    <StackLayout IsVisible="{Binding HasEvent}" Margin="5">
+                        <Frame Padding="10,5">
+                            <StackLayout>
+                                <StackLayout Spacing="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Text="{StaticResource IconShedule}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}" 
+                                               FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                        <Label Grid.Column="1" Text="{Binding ViewDateFromTo}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" />
+                                    </Grid>
+                                    <Grid IsVisible="{Binding HasViewLocation}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Text="{StaticResource IconPlace}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}" 
+                                               FontFamily="{StaticResource MaterialIcons}" Padding="0,2,0,0" />
+                                        <Label Grid.Column="1" Text="{Binding ViewLocation}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" />
+                                    </Grid>
+                                </StackLayout>
+                                <Label Text="{Binding ViewName}" TextColor="{StaticResource PrimaryText}" />
+                                <Label Text="{Binding ViewDescription}" FontSize="{StaticResource FontSmall}" TextColor="{StaticResource SecondaryText}"
+                                       IsVisible="{Binding HasViewDescription}" />
+                                <view:ViewLike MobLike="{Binding MobLike}" Page="{x:Reference ThisPageEvent}" HorizontalOptions="End" />
+                                <control:ViewAccordion Title="Организатор" Margin="-10,0" TitleTextLeftOffset="5" IsVisible="{Binding HasMobUser}">
+                                    <control:ViewAccordion.View>
+                                        <StackLayout Margin="10,0">
+                                            <view:ViewUser MobUser="{Binding MobUser}" MobUserClicked="ViewUser_OnMobUserClicked" />
+                                        </StackLayout>
+                                    </control:ViewAccordion.View>
+                                </control:ViewAccordion>
+                            </StackLayout>
+                        </Frame>
+                        <control:ViewAccordion x:Name="ViewAccordionComment" Title="Комментарии" IsVisible="{Binding HasCommentList}">
+                            <control:ViewAccordion.View>
+                                <StackLayout Margin="0" BindableLayout.ItemsSource="{Binding CommentList}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Padding="10,5">
+                                                <StackLayout>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+                                                        <Label Grid.Column="0" Text="{StaticResource IconShedule}" FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderText}" 
+                                                               FontFamily="{StaticResource MaterialIcons}" VerticalOptions="Center" />
+                                                        <Label Grid.Column="1" VerticalOptions="Center" Text="{Binding DateInput, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
+                                                               FontSize="{StaticResource FontMicro}" TextColor="{StaticResource PlaceholderTextMicro}" LineBreakMode="TailTruncation" />
+                                                        <view:ViewUserSmall Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="Center" MobUser="{Binding MobUser}" MobUserClicked="ViewUser_OnMobUserClicked" />
+                                                    </Grid>
+                                                    <Label Text="{Binding CommentValue}" TextColor="{StaticResource PrimaryText}" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </control:ViewAccordion.View>
+                        </control:ViewAccordion>
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout VerticalOptions="EndAndExpand" Padding="5" BackgroundColor="{StaticResource Selected}">
+                    <StackLayout Spacing="0" Orientation="Horizontal">
+                        <Editor x:Name="EditorSend" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Placeholder="{Binding EditorSendPlaceholder}" MaxLength="500"
+                                AutoSize="TextChanges" Keyboard="Text" IsSpellCheckEnabled="True"
+                                TextChanged="EditorSend_OnTextChanged" Focused="EditorSend_OnFocused" Unfocused="EditorSend_OnUnfocused" />
+                        <control:TintedImageButton x:Name="ButtonSend" HorizontalOptions="End" VerticalOptions="FillAndExpand" Source="send.png" IsEnabled="{Binding ButtonSendIsEnabled}"
+                                                   Clicked="ButtonSend_OnClicked" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <control:ViewActivityIndicator IsVisible="{Binding IsBusy}" IsBusy="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
